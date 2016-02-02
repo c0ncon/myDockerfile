@@ -1,0 +1,20 @@
+FROM java-8-oracle
+
+# Install curl
+RUN apt-get update
+RUN apt-get install -y curl
+RUN locale-gen en_US en_US.UTF-8
+
+# Downloading spark 1.6.0 with hadoop 2.6
+RUN curl http://ftp.kddilabs.jp/infosystems/apache/spark/spark-1.6.0/spark-1.6.0-bin-hadoop2.6.tgz -o /home/spark.tgz
+RUN tar -xzf /home/spark.tgz -C /home
+RUN mv /home/spark-1.6.0-bin-hadoop2.6 /home/spark
+RUN rm /home/spark.tgz
+
+ENV SPARK_HOME /home/spark
+
+RUN chmod +x /home/spark/sbin/start-master.sh
+RUN chmod +x /home/spark/sbin/start-slave.sh
+
+EXPOSE 7077 8080
+

@@ -1,0 +1,9 @@
+FROM spark_base
+
+# Install supervisord
+RUN apt-get install -y supervisor
+RUN mkdir -p /var/log/supervisor
+
+COPY supervisord.worker.conf /etc/supervisor/conf.d/supervisord.conf
+
+CMD ["/usr/bin/supervisord"]

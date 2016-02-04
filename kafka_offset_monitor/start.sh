@@ -1,0 +1,1 @@
+docker run -d --dns=172.17.0.1 --name kafka_offset_monitor kafka_offset_monitor
